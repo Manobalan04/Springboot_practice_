@@ -1,0 +1,32 @@
+spring:
+  config:
+    activate:
+      on-profile:  dev
+---
+spring:
+  profiles: prod
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      password: Mano@2001
+      url: jdbc:mysql://localhost:3306/dcbapp
+      username: root
+    jpa:
+      hibernate:
+        ddl-auto: update
+        show-sql: true
+
+---
+spring:
+  profiles: dev
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      password: Mano@2001
+      url: jdbc:mysql://localhost:3306/dcbapp
+      username: root
+      jpa:
+        hibernate:
+          ddl-auto: update
+          show-sql: true
+---

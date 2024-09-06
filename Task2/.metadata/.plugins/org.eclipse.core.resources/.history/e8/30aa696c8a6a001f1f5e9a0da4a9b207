@@ -1,0 +1,5 @@
+package com.task2.springboot.controller;
+
+public class HController {
+
+}

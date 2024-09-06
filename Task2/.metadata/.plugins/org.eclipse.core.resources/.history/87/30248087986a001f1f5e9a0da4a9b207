@@ -1,0 +1,15 @@
+package com.task2.springboot.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.task2.springboot.entity.Department;
+
+@RestController
+public class DepartmentController {
+
+	public Department saveDepartment{
+		
+	}
+	
+	
+}

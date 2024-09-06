@@ -1,0 +1,51 @@
+server:
+    port: 8080
+
+    spring:
+      profiles:
+        active: dev
+
+---
+spring:
+    profiles: dev
+    datasource:
+        hikari:
+            driver-class-name: com.mysql.cj.jdbc.Driver
+        password: Mano@2001
+        url: jdbc:mysql://localhost:3306/dcbapp-dev
+        username: root
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true		
+---
+spring:
+      profiles: qa
+      datasource:
+          hikari:
+             driver-class-name: com.mysql.cj.jdbc.Driver
+          password: Mano@2001
+          url: jdbc:mysql://localhost:3306/dcbapp-qa
+          username: root
+      jpa:
+          hibernate:
+              ddl-auto: update
+          show-sql: true			
+---
+
+spring:
+      profiles: prod
+      datasource:
+          hikari:
+              driver-class-name: com.mysql.cj.jdbc.Driver
+          password: Mano@2001
+          url: jdbc:mysql://localhost:3306/dcbapp-prod
+          username: root
+      jpa:
+          hibernate:
+              ddl-auto: update
+          show-sql: true
+					
+---
+
+	

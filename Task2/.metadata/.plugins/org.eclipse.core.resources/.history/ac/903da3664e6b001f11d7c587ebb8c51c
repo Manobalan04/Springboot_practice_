@@ -1,0 +1,18 @@
+spring:
+  config:
+    activate: 
+      on-profile: dev
+---
+spring:
+  profiles: dev
+server:
+  port: 8081
+  url: jdbc:mysql://localhost:3306/dcbapp-dev
+
+---
+spring:
+  profiles: prod
+server:
+  port: 8082
+  url: jdbc:mysql://localhost:3306/dcbapp-prod
+---

@@ -1,0 +1,9 @@
+package com.task2.springboot.repository.service;
+
+public interface DepartmentService {
+
+	public Department saveDepartment(Department department) {
+		
+	}
+	
+}

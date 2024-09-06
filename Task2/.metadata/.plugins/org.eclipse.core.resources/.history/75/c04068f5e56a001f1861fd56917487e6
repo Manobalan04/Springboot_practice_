@@ -1,0 +1,17 @@
+server.port=8080
+
+#spring.h2.console.enabled=true
+#spring.datasource.url=jdbc:h2:mem:dcbapp
+#spring.datasource.driverClassName=org.h2.Driver
+#spring.datasource.username=sa
+#spring.datasource.password=password
+#spring.jpa.datasource-platform=org.hibernate.dialect.H2Dialect
+
+
+
+spring.application.name=pract
+spring.datasource.url=jdbc:mysql://localhost:3306/dcbapp
+spring.datasource.username=root
+spring.datasource.password=Mano@2001
+spring.datasource.hikari.driver-class-name=com.mysql.jdbc.Driver
+spring.jpa.show-sql= true

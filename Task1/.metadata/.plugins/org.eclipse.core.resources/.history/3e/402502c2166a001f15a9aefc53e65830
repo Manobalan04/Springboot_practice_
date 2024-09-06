@@ -1,0 +1,36 @@
+package com.example.cinema.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.example.cinema.model.Movie;
+
+import ch.qos.logback.core.model.Model;
+
+@Controller
+@RequestMapping("/")
+public class MovieController {
+
+	@RequestMapping(method=RequestMethod.GET, value="/movies")
+	public String getMovieListByActor(Model model) {
+		
+		List<Movie> movieList = new ArrayList<Movie>();
+		Movie movie = new Movie();
+		movie.setActor("tom");
+		movie.setDescription("Mission Imposible");
+		movie.setName("MI3");
+		
+		
+//		model.addAttribute("movies",movieList);
+		
+		return "movieList";
+		
+	}
+	
+	
+	
+}
