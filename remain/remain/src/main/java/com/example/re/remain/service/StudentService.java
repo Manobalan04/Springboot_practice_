@@ -23,4 +23,6 @@ public interface StudentService{
     public List<StudentEntity> fetchStudentByStudentPlace(String studentPlace);
 
 	public List<StudentEntity> fetchDepartmentByCode(String departmentCode);
+
+
 }

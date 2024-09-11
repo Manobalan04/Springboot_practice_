@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.example.re.remain.controller.StudentNameAlreadyExistsException;
 import com.example.re.remain.entity.StudentEntity;
 import com.example.re.remain.repository.StudentRepository;
 
@@ -18,6 +20,9 @@ public class StudentServiceImp implements StudentService{
 
     @Override
     public StudentEntity saveStudent(StudentEntity studentEntity) {
+    	if (!studentRepository.findBystudentName(studentEntity.getStudentName()).isEmpty()) {
+            throw new StudentNameAlreadyExistsException("Student name already exists: " + studentEntity.getStudentName());
+        }
         return studentRepository.save(studentEntity);
     }
     
@@ -77,9 +82,6 @@ public class StudentServiceImp implements StudentService{
 		return studentRepository.findBystudentPlace(studentPlace);
 	}
 
-	
-
-	
 
 
 }

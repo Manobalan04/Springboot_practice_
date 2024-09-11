@@ -3,9 +3,13 @@ package com.example.re.remain.controller;
 import com.example.re.remain.entity.StudentEntity;
 import com.example.re.remain.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class StudentController {
@@ -14,8 +18,18 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping("/save")
-    public StudentEntity saveStudent(@RequestBody StudentEntity studentEntity){
-        return studentService.saveStudent(studentEntity);
+    public ResponseEntity<Object> saveStudent(@RequestBody StudentEntity studentEntity){
+    	Map<String,Object> response = new HashMap<>();
+    	try {
+            StudentEntity savedStudent = studentService.saveStudent(studentEntity);
+            response.put("status", HttpStatus.OK);
+            response.put("data", savedStudent);
+            return ResponseEntity.ok(savedStudent);
+        } catch (StudentNameAlreadyExistsException ex) {
+        	response.put("status", HttpStatus.BAD_REQUEST);
+        	response.put("message", ex.getMessage());
+        	return ResponseEntity.badRequest().body(response);
+        }
     }
 
     @GetMapping("/list")
