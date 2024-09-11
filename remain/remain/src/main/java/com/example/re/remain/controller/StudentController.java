@@ -4,10 +4,12 @@ import com.example.re.remain.entity.StudentEntity;
 import com.example.re.remain.service.DepartmentNameAlreadyExistsException;
 import com.example.re.remain.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Provider.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +78,25 @@ public class StudentController {
     public List<StudentEntity> fetchStudentByStudentPlace(@PathVariable("location") String studentPlace) {
         return studentService.fetchStudentByStudentPlace(studentPlace);
     }
+    
+    @GetMapping("/sort/{field}")
+    private APIResponse<List<StudentEntity>> getDetailsWithSort(@PathVariable("field") String page){
+    	List<StudentEntity> allDetails = studentService.fetchStudentWithSorting(page);
+    	return new APIResponse<>(allDetails.size(), allDetails);
+    }
+    
+    @GetMapping("/paging/{offset}/{pageSize}")
+    private APIResponse<Page<StudentEntity>> getDetailsWithPaging(@PathVariable int offset, @PathVariable int pageSize){
+    	Page<StudentEntity> allDetails = studentService.fetchStudentWithPaging(offset, pageSize);
+    	return new APIResponse<>(allDetails.getSize(), allDetails);
+    }
+    
+    @GetMapping("/pagingandsort/{offset}/{pageSize}/{field}")
+    private APIResponse<Page<StudentEntity>> getDetailsWithPagingAndSorting(@PathVariable int offset, @PathVariable int pageSize, @PathVariable String field){
+    	Page<StudentEntity> allDetails = studentService.fetchStudentWithPagingAndSorting(offset, pageSize, field);
+    	return new APIResponse<>(allDetails.getSize(), allDetails);
+    }
+    
 
 
 }

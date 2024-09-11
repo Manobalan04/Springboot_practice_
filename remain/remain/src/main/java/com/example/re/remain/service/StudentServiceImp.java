@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Objects;
 import jakarta.persistence.*;
 
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -86,6 +89,27 @@ public class StudentServiceImp implements StudentService{
 	@Override
 	public List<StudentEntity> fetchStudentByStudentPlace(String studentPlace) {
 		return studentRepository.findBystudentPlace(studentPlace);
+	}
+
+
+
+	@Override
+	public List<StudentEntity> fetchStudentWithSorting(String page) {
+		return studentRepository.findAll(Sort.by(Sort.Direction.ASC,page));
+	}
+
+
+
+	@Override
+	public Page<StudentEntity> fetchStudentWithPaging(int offset, int pageSize) {
+		 Page<StudentEntity> all = studentRepository.findAll(PageRequest.of(offset, pageSize));
+		 return all;
+	}
+	
+	@Override
+	public Page<StudentEntity> fetchStudentWithPagingAndSorting(int offset, int pageSize, String page) {
+		 Page<StudentEntity> all = studentRepository.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(Sort.Direction.DESC, page)));
+		 return all;
 	}
 
 
