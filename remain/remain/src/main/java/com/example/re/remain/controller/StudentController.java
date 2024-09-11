@@ -1,6 +1,7 @@
 package com.example.re.remain.controller;
 
 import com.example.re.remain.entity.StudentEntity;
+import com.example.re.remain.service.DepartmentNameAlreadyExistsException;
 import com.example.re.remain.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,18 +20,19 @@ public class StudentController {
 
     @PostMapping("/save")
     public ResponseEntity<Object> saveStudent(@RequestBody StudentEntity studentEntity){
-    	Map<String,Object> response = new HashMap<>();
+    	HashMap<String,Object> response = new HashMap<>();
     	try {
             StudentEntity savedStudent = studentService.saveStudent(studentEntity);
-            response.put("status", HttpStatus.OK);
+            response.put("status","Your Data Stored");
             response.put("data", savedStudent);
-            return ResponseEntity.ok(savedStudent);
-        } catch (StudentNameAlreadyExistsException ex) {
+            return ResponseEntity.ok(response);
+        } catch(Exception e) {
         	response.put("status", HttpStatus.BAD_REQUEST);
-        	response.put("message", ex.getMessage());
+        	response.put("message",e.getMessage());
         	return ResponseEntity.badRequest().body(response);
         }
     }
+    
 
     @GetMapping("/list")
     public List<StudentEntity> fetchStudentList(){

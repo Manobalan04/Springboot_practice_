@@ -23,8 +23,14 @@ public class StudentServiceImp implements StudentService{
     	if (!studentRepository.findBystudentName(studentEntity.getStudentName()).isEmpty()) {
             throw new StudentNameAlreadyExistsException("Student name already exists: " + studentEntity.getStudentName());
         }
+    	if (!studentRepository.findBydepartmentName(studentEntity.getDepartmentName()).isEmpty()) {
+            throw new DepartmentNameAlreadyExistsException("Department name already exists: " + studentEntity.getDepartmentName());
+        }
+    	
         return studentRepository.save(studentEntity);
     }
+    
+   
     
     @Override
 	public List<StudentEntity> fetchStudentList() {
@@ -35,7 +41,6 @@ public class StudentServiceImp implements StudentService{
     public StudentEntity fetchStudentById(Long studentId) {
         return studentRepository.findById(studentId).get();
     }
-
 
     @Override
 	public List<StudentEntity> fetchDepartmentByCode(String departmentCode) {
@@ -55,6 +60,7 @@ public class StudentServiceImp implements StudentService{
 
         if(Objects.nonNull(studentEntity.getStudentName())&&
         !"".equalsIgnoreCase(studentEntity.getStudentName())){
+        	
             reDB.setStudentName(studentEntity.getStudentName());
         }
 
